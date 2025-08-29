@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'navigation.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <!-- <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'insights' %}">Study Insights</a>
+    <a href="{% url 'tasks' %}">Tasks</a>
+    <a href="{% url 'leaderboard' %}">Leaderboard</a> -->
+
+   <div class="sidebar">
+    <div class="sidebar-header">
+        🎓 Study Buddy
+    </div>
+    <div class="nav-item" data-page="dashboard">
+        📊 Dashboard
+    </div>
+    <div class="nav-item" data-page="insights">
+        💡 Study Insights
+    </div>
+    <div class="nav-item" data-page="tasks">
+        📝 Tasks
+    </div>
+    <div class="nav-item" data-page="leaderboard">
+        🏆 Leaderboard
+    </div>
+</div>
+
+    <!-- Main dashboard content -->
+    <div class="main-content">
+        <!-- Page header with buttons -->
+        <div class="header">
+            <h1 class="page-title">📊 Study Analytics</h1>
+            <div class="header-buttons">
+                <button class="btn btn-primary" id="startSessionBtn">📹 Start Session</button>
+                <!-- Dropdown for pomodoro options -->
+                <div class="pomodoro-dropdown" id="pomodoroDropdown">
+                    <div class="pomodoro-title">Choose Session Type</div>
+                    <div class="pomodoro-option" data-study="25" data-break="5">
+                        <span class="pomodoro-time">25 min</span>
+                        <span class="pomodoro-desc">Study + 5 min break</span>
+                    </div>
+                    <div class="pomodoro-option" data-study="60" data-break="10">
+                        <span class="pomodoro-time">1 hour</span>
+                        <span class="pomodoro-desc">Study + 10 min break</span>
+                    </div>
+                    <div class="pomodoro-option" data-study="120" data-break="20">
+                        <span class="pomodoro-time">2 hours</span>
+                        <span class="pomodoro-desc">Study + 20 min break</span>
+                    </div>
+                    <div class="pomodoro-option" data-study="180" data-break="30">
+                        <span class="pomodoro-time">3 hours</span>
+                        <span class="pomodoro-desc">Study + 30 min break</span>
+                    </div>
+                    <button class="start-pomodoro-btn" id="startPomodoroBtn">Start Session</button>
+                </div>
+                <button class="btn btn-success">+ New Task</button>
+            </div>
+        </div>
+
+        <!-- AI Assistant section - this is the coolest feature! -->
+        <div class="ai-assistant-card">
+            <div style="display: flex; gap: 20px;">
+                <div class="camera-container">
+                    <div class="camera-icon" id="cameraIcon">📹</div>
+                    <video id="webcamPreview" autoplay muted playsinline></video>
+                </div>
+                <div class="ai-content">
+                    <div class="ai-title">AI Study Assistant</div>
+                    <div class="ai-description">
+                        Based on my analysis, you seem focused but your blinking rate indicates eye strain. 
+                        Consider taking a 5-minute break and looking at something 20 feet away. Also, I noticed 
+                        you haven't had water in the last hour.
+                    </div>
+                </div>
+            </div>
+            <div class="webcam-text">Webcam analyzes your study habits</div>
+            <button class="allow-camera-btn" id="allowCameraBtn">Allow Camera Access</button>
+            <div class="analysis-metrics">
+                <div class="metric">
+                    <div class="metric-label">Mood Detection</div>
+                    <div class="metric-value focused">Focused but tired</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Blink Rate</div>
+                    <div class="metric-value blink-rate">12 blinks/min (High)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Distraction Time</div>
+                    <div class="metric-value distraction">4 min in last hour</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main stats cards -->
+        <div class="stats-grid">
+            <div class="stat-card focus">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value">82%</div>
+                <div class="stat-label">Focus Score</div>
+                <div class="stat-sublabel">5% from yesterday</div>
+            </div>
+            <div class="stat-card water">
+                <div class="stat-icon">💧</div>
+                <div class="stat-value">750ml</div>
+                <div class="stat-label">Water Intake</div>
+                <div class="stat-sublabel">Goal: 2000ml</div>
+            </div>
+            <div class="stat-card study-time">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-value">3.5h</div>
+                <div class="stat-label">Study Time</div>
+                <div class="stat-sublabel">Today's sessions</div>
+            </div>
+            <div class="stat-card tasks">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value">7/12</div>
+                <div class="stat-label">Tasks Done</div>
+                <div class="stat-sublabel">58% complete</div>
+            </div>
+        </div>
+
+        <!-- Three column layout for additional info -->
+        <div class="bottom-grid">
+            <!-- Focus trend chart -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">📈</span>
+                    Focus Trend
+                </div>
+                <div class="chart-container">
+                    Chart visualization would go here
+                </div>
+            </div>
+
+            <!-- Todo list -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">📋</span>
+                    To-Do List
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <span class="todo-text">Complete Math Assignment</span>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" class="todo-checkbox" checked>
+                    <span class="todo-text">Review History Notes</span>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <span class="todo-text">Prepare Science Presentation</span>
+                </div>
+                <div class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <span class="todo-text">Read Chapter 7</span>
+                </div>
+                <div class="add-task">+ Add Task</div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">🏆</span>
+                    Leaderboard
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank-circle rank-1">1</div>
+                    <span class="leaderboard-name">Sarah Chen</span>
+                    <span class="leaderboard-score">8.5h</span>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank-circle rank-2">2</div>
+                    <span class="leaderboard-name">You</span>
+                    <span class="leaderboard-score">7.2h</span>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank-circle rank-3">3</div>
+                    <span class="leaderboard-name">Alex Kim</span>
+                    <span class="leaderboard-score">6.8h</span>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="rank-circle rank-4">4</div>
+                    <span class="leaderboard-name">Mike Johnson</span>
+                    <span class="leaderboard-score">5.5h</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips and issues row -->
+        <div class="tips-issues-grid">
+            <div class="card tips-card">
+                <div class="card-title">
+                    <span class="card-icon">💡</span>
+                    Improvement Tips
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon"></div>
+                    <span>Take a 5-minute break every 25 minutes</span>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon"></div>
+                    <span>Drink water regularly to maintain hydration</span>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-icon"></div>
+                    <span>Use the 20-20-20 rule for eye care: every 20 minutes, look at something 20 feet away for 20 seconds</span>
+                </div>
+            </div>
+
+            <div class="card issues-card">
+                <div class="card-title">
+                    <span class="card-icon">⚠️</span>
+                    Detected Issues
+                </div>
+                <div class="issue-item">
+                    <div class="issue-icon"></div>
+                    <span>Reduced blinking (potential eye strain)</span>
+                </div>
+                <div class="issue-item">
+                    <div class="issue-icon"></div>
+                    <span>Low water intake detected</span>
+                </div>
+                <div class="issue-item">
+                    <div class="issue-icon"></div>
+                    <span>Phone distraction detected (4 minutes total)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timer Mode Selection Modal -->
+    <div id="timerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeTimer">&times;</span>
+            <h2>Choose Timer Mode</h2>
+            <div class="timer-options">
+                <div class="timer-option" id="fullscreenTimer">
+                    <div class="option-icon">🖥️</div>
+                    <div class="option-text">
+                        <div class="option-title">Fullscreen Timer</div>
+                        <div class="option-desc">Focus on your work with a fullscreen countdown</div>
+                    </div>
+                </div>
+                <div class="timer-option" id="cameraTimer">
+                    <div class="option-icon">📹</div>
+                    <div class="option-text">
+                        <div class="option-title">Camera View</div>
+                        <div class="option-desc">See yourself studying with the timer overlay</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Timer Overlay -->
+    <div id="fullscreenTimerOverlay" class="timer-overlay">
+        <div class="timer-content">
+            <div id="timeLeft" class="time-display">25:00</div>
+            <div id="timerLabel" class="timer-label">Study Session</div>
+            <div class="progress-bar">
+                <div id="progressBar" class="progress"></div>
+            </div>
+            <div class="timer-controls">
+                <button id="pauseBtn" class="timer-btn">⏸️ Pause</button>
+                <button id="stopBtn" class="timer-btn">⏹️ Stop</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Camera Timer Overlay -->
+    <div id="cameraTimerOverlay" class="camera-overlay">
+        <video id="timerWebcam" autoplay muted playsinline></video>
+        <div class="timer-overlay-content">
+            <div id="overlayTime" class="overlay-time">25:00</div>
+            <div id="overlayLabel" class="overlay-label">Study Session</div>
+            <div class="overlay-progress-bar">
+                <div id="progressBarCamera" class="overlay-progress"></div>
+            </div>
+            <div class="overlay-controls">
+                <button id="pauseBtnCamera" class="overlay-btn">⏸️</button>
+                <button id="stopBtnCamera" class="overlay-btn">⏹️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Friends status widget -->
+    <div class="friends-online">
+        <div class="friends-title">Friends Online</div>
+        <div class="friend-item">
+            <div class="online-dot"></div>
+            <span class="friend-name">Alex Kim</span>
+        </div>
+        <div class="friend-item">
+            <div class="online-dot"></div>
+            <span class="friend-name">Sarah Chen</span>
+        </div>
+        <div class="friend-item">
+            <div class="online-dot"></div>
+            <span class="friend-name">Mike Johnson</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+
+</body>
+</html>

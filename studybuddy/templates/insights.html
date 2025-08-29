@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'navigation.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Insights - Study Buddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <!-- <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'insights' %}">Study Insights</a>
+    <a href="{% url 'tasks' %}">Tasks</a>
+    <a href="{% url 'leaderboard' %}">Leaderboard</a> -->
+    <div class="sidebar">
+    <div class="sidebar-header">
+        🎓 Study Buddy
+    </div>
+    <div class="nav-item" data-page="dashboard">
+        📊 Dashboard
+    </div>
+    <div class="nav-item" data-page="insights">
+        💡 Study Insights
+    </div>
+    <div class="nav-item" data-page="tasks">
+        📝 Tasks
+    </div>
+    <div class="nav-item" data-page="leaderboard">
+        🏆 Leaderboard
+    </div>
+</div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Page header -->
+        <div class="header">
+            <h1 class="page-title">💡 Study Insights</h1>
+            <div class="header-buttons">
+                <button class="btn btn-primary">📈 Generate Report</button>
+                <button class="btn btn-success">⚙️ Settings</button>
+            </div>
+        </div>
+
+        <!-- Weekly overview -->
+        <div class="insights-overview">
+            <div class="insight-card weekly">
+                <div class="insight-icon">📅</div>
+                <div class="insight-content">
+                    <div class="insight-title">This Week's Performance</div>
+                    <div class="insight-value">28.5 hours studied</div>
+                    <div class="insight-trend positive">+15% from last week</div>
+                </div>
+            </div>
+            <div class="insight-card productivity">
+                <div class="insight-icon">⚡</div>
+                <div class="insight-content">
+                    <div class="insight-title">Peak Productivity</div>
+                    <div class="insight-value">2:00 PM - 4:00 PM</div>
+                    <div class="insight-trend neutral">Your golden hours</div>
+                </div>
+            </div>
+            <div class="insight-card focus">
+                <div class="insight-icon">🎯</div>
+                <div class="insight-content">
+                    <div class="insight-title">Average Focus Score</div>
+                    <div class="insight-value">82%</div>
+                    <div class="insight-trend positive">+5% improvement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts section -->
+        <div class="charts-grid">
+            <!-- Study time chart -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>📈 Study Time Trends</h3>
+                    <select class="time-filter">
+                        <option>Last 7 days</option>
+                        <option>Last 30 days</option>
+                        <option>Last 3 months</option>
+                    </select>
+                </div>
+                <div class="chart-placeholder">
+                    <div class="chart-bars">
+                        <div class="bar" style="height: 60%"><span>Mon</span></div>
+                        <div class="bar" style="height: 80%"><span>Tue</span></div>
+                        <div class="bar" style="height: 45%"><span>Wed</span></div>
+                        <div class="bar" style="height: 90%"><span>Thu</span></div>
+                        <div class="bar" style="height: 75%"><span>Fri</span></div>
+                        <div class="bar" style="height: 40%"><span>Sat</span></div>
+                        <div class="bar" style="height: 65%"><span>Sun</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Focus patterns -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>🧠 Focus Patterns</h3>
+                </div>
+                <div class="focus-heatmap">
+                    <div class="heatmap-labels">
+                        <div class="time-label">6 AM</div>
+                        <div class="time-label">12 PM</div>
+                        <div class="time-label">6 PM</div>
+                        <div class="time-label">12 AM</div>
+                    </div>
+                    <div class="heatmap-grid">
+                        <div class="heatmap-row">
+                            <div class="day-label">Mon</div>
+                            <div class="heat-cell low"></div>
+                            <div class="heat-cell medium"></div>
+                            <div class="heat-cell high"></div>
+                            <div class="heat-cell low"></div>
+                        </div>
+                        <div class="heatmap-row">
+                            <div class="day-label">Tue</div>
+                            <div class="heat-cell medium"></div>
+                            <div class="heat-cell high"></div>
+                            <div class="heat-cell high"></div>
+                            <div class="heat-cell low"></div>
+                        </div>
+                        <div class="heatmap-row">
+                            <div class="day-label">Wed</div>
+                            <div class="heat-cell low"></div>
+                            <div class="heat-cell low"></div>
+                            <div class="heat-cell medium"></div>
+                            <div class="heat-cell low"></div>
+                        </div>
+                        <div class="heatmap-row">
+                            <div class="day-label">Thu</div>
+                            <div class="heat-cell medium"></div>
+                            <div class="heat-cell high"></div>
+                            <div class="heat-cell very-high"></div>
+                            <div class="heat-cell medium"></div>
+                        </div>
+                        <div class="heatmap-row">
+                            <div class="day-label">Fri</div>
+                            <div class="heat-cell high"></div>
+                            <div class="heat-cell very-high"></div>
+                            <div class="heat-cell high"></div>
+                            <div class="heat-cell low"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study subjects breakdown -->
+        <div class="subjects-section">
+            <div class="section-header">
+                <h3>📚 Subject Breakdown</h3>
+            </div>
+            <div class="subjects-grid">
+                <div class="subject-card math">
+                    <div class="subject-icon">➕</div>
+                    <div class="subject-info">
+                        <div class="subject-name">Mathematics</div>
+                        <div class="subject-time">8.5 hours</div>
+                        <div class="subject-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                            <span>65%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="subject-card science">
+                    <div class="subject-icon">🔬</div>
+                    <div class="subject-info">
+                        <div class="subject-name">Science</div>
+                        <div class="subject-time">6.2 hours</div>
+                        <div class="subject-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                            <span>45%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="subject-card history">
+                    <div class="subject-icon">📜</div>
+                    <div class="subject-info">
+                        <div class="subject-name">History</div>
+                        <div class="subject-time">4.8 hours</div>
+                        <div class="subject-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                            <span>80%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="subject-card language">
+                    <div class="subject-icon">📖</div>
+                    <div class="subject-info">
+                        <div class="subject-name">Language Arts</div>
+                        <div class="subject-time">9.0 hours</div>
+                        <div class="subject-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                            <span>90%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI insights -->
+        <div class="ai-insights-section">
+            <div class="section-header">
+                <h3>🤖 AI Recommendations</h3>
+            </div>
+            <div class="insights-list">
+                <div class="insight-item positive">
+                    <div class="insight-indicator"></div>
+                    <div class="insight-text">
+                        <strong>Great progress in Language Arts!</strong> You've maintained consistent study sessions and your focus scores are trending upward.
+                    </div>
+                </div>
+                <div class="insight-item warning">
+                    <div class="insight-indicator"></div>
+                    <div class="insight-text">
+                        <strong>Consider adjusting your Math study schedule.</strong> Your focus drops significantly after 45 minutes. Try shorter, more frequent sessions.
+                    </div>
+                </div>
+                <div class="insight-item suggestion">
+                    <div class="insight-indicator"></div>
+                    <div class="insight-text">
+                        <strong>Optimize your study environment.</strong> Data shows you're 23% more focused when studying in natural light between 2-4 PM.
+                    </div>
+                </div>
+                <div class="insight-item positive">
+                    <div class="insight-indicator"></div>
+                    <div class="insight-text">
+                        <strong>Excellent consistency!</strong> You've met your daily study goals 6 out of 7 days this week. Keep up the momentum!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Friends status widget -->
+    <div class="friends-online">
+        <div class="friends-title">Friends Online</div>
+        <div class="friend-item">
+            <div class="online-dot"></div>
+            <span class="friend-name">Alex Kim</span>
+        </div>
+        <div class="friend-item">
+            <div class="online-dot"></div>
+            <span class="friend-name">Sarah Chen</span>
+        </div>
+        <div class="friend-item">
+            <div class="online-dot"></div>
+            <span class="friend-name">Mike Johnson</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+
+</body>
+</html>
